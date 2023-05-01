@@ -7,22 +7,21 @@ export class App extends React.Component {
     bad: 0,
   };
 
-  handleGoodFeedback = () =>
-    this.setState(prevState => ({ good: prevState.good + 1 }));
+  handleFeedback = ({ target: { dataset } }) => {
+    this.setState(prevState => {
+      return { [dataset.feedback]: prevState[dataset.feedback] + 1 };
+    });
+  };
 
-  handleNeutralFeedback = () =>
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
+  countTotalFeedback = () => {
+    return Object.values(this.state).reduce((total, value) => total + value, 0);
+  };
 
-  handleBadFeedback = () =>
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
-
-  countTotalFeedback = () =>
-    Object.values(this.state).reduce((total, value) => (total += value), 0);
-
-  countPositiveFeedbackPercentage = () =>
-    this.countTotalFeedback() === 0
+  countPositiveFeedbackPercentage = () => {
+    return this.countTotalFeedback() === 0
       ? 0
-      : Math.trunc((this.state.good / this.countTotalFeedback()) * 100);
+      : Math.trunc((this.state.good * 100) / this.countTotalFeedback());
+  };
 
   render() {
     return (
@@ -31,17 +30,29 @@ export class App extends React.Component {
 
         <ul style={{ display: 'flex', gap: 10 }}>
           <li>
-            <button type="button" onClick={this.handleGoodFeedback}>
+            <button
+              type="button"
+              data-feedback="good"
+              onClick={this.handleFeedback}
+            >
               Good
             </button>
           </li>
           <li>
-            <button type="button" onClick={this.handleNeutralFeedback}>
+            <button
+              type="button"
+              data-feedback="neutral"
+              onClick={this.handleFeedback}
+            >
               Neutral
             </button>
           </li>
           <li>
-            <button type="button" onClick={this.handleBadFeedback}>
+            <button
+              type="button"
+              data-feedback="bad"
+              onClick={this.handleFeedback}
+            >
               Bad
             </button>
           </li>
