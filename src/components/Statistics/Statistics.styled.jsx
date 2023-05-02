@@ -7,7 +7,7 @@ export const StatisticsList = styled.ul`
   font-weight: 500;
 `;
 
-export const StatisticsItem = styled.p`
+export const StatisticsItem = styled.li`
   min-width: 180px;
   border-bottom: 1px solid gray;
 `;
