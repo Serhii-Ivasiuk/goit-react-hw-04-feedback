@@ -15,9 +15,9 @@ export class App extends React.Component {
     bad: 0,
   };
 
-  handleFeedback = ({ target }) => {
+  handleFeedback = item => {
     this.setState(prevState => {
-      return { [target.innerHTML]: prevState[target.innerHTML] + 1 };
+      return { [item]: prevState[item] + 1 };
     });
   };
 
@@ -36,7 +36,7 @@ export class App extends React.Component {
       <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={this.state}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.handleFeedback}
           ></FeedbackOptions>
         </Section>
