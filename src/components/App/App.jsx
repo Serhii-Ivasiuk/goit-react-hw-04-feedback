@@ -63,7 +63,7 @@ export function App() {
             bad={bad}
             total={totalFeedback}
             positivePercentage={positiveFeedbackPercentage}
-          ></Statistics>
+          />
         )}
       </Section>
     </Container>
